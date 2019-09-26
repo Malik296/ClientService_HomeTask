@@ -20,27 +20,17 @@ public class RandomClientGenerator {
 
     public ClientDTO nameGenerator() {
         clientDTO = new ClientDTO();
-        if (random.nextBoolean() == true) {
-            return manNameGenerator();
+        if (random.nextBoolean()) {
+            int n = random.nextInt(MAN_NAME.length);
+            int ln = random.nextInt(MAN_LAST_NAME.length);
+            clientDTO.setName(MAN_NAME[n]);
+            clientDTO.setLastName(MAN_LAST_NAME[ln]);
         } else {
-            return womanNameGenerator();
+            int n = random.nextInt(WOMAN_NAME.length);
+            int ln = random.nextInt(WOMAN_LAST_NAME.length);
+            clientDTO.setName(WOMAN_NAME[n]);
+            clientDTO.setLastName(WOMAN_LAST_NAME[ln]);
         }
-    }
-
-    private ClientDTO womanNameGenerator() {
-        int n = random.nextInt(WOMAN_NAME.length);
-        int ln = random.nextInt(WOMAN_LAST_NAME.length);
-        clientDTO.setName(WOMAN_NAME[n]);
-        clientDTO.setLastName(WOMAN_LAST_NAME[ln]);
         return clientDTO;
     }
-
-    private ClientDTO manNameGenerator() {
-        int n = random.nextInt(MAN_NAME.length);
-        int ln = random.nextInt(MAN_LAST_NAME.length);
-        clientDTO.setName(MAN_NAME[n]);
-        clientDTO.setLastName(MAN_LAST_NAME[ln]);
-        return clientDTO;
-    }
-
 }
