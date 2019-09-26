@@ -12,36 +12,13 @@ import javax.validation.constraints.Size;
 @Component
 public class ClientDTO {
 
-    private int id;
+    private long id;
     @NotBlank
     @Size(min = 3)
     private String name;
     @NotBlank
+    @Size(min = 3)
     private String lastName;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     @Override
     public String toString() {

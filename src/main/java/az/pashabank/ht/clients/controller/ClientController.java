@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("client")
@@ -20,29 +20,32 @@ public class ClientController {
     }
 
     @GetMapping
-    public Collection<ClientDTO> getAllClient() {
+    public List<ClientDTO> getAllClient() {
+        logger.info("Input Get Request");
         return clientService.getAllClient();
     }
 
     @GetMapping("{id}")
-    public ClientDTO getClientForId( @PathVariable String id) {
-
-        return clientService.findClientForId(id);
+    public ClientDTO getClientForId( @PathVariable Long id) throws NullPointerException {
+        logger.info("Input Find Client Request: {}", id);
+        return clientService.findClientById(id);
     }
 
     @PostMapping
     public ClientDTO create(@RequestBody @Valid ClientDTO request) {
-        System.out.println(request.getName());
+        logger.info("Input Post Request");
         return clientService.addClient(request);
     }
 
     @PutMapping
-    public ClientDTO update(@RequestBody ClientDTO request) {
+    public ClientDTO update(@Valid @RequestBody ClientDTO request) throws NullPointerException {
+        logger.info("Input Put Request");
         return clientService.updateClient(request);
     }
 
     @DeleteMapping("{id}")
-    public ClientDTO delete(@PathVariable String id) {
+    public ClientDTO delete(@PathVariable Long id) throws NullPointerException {
+        logger.info("Input Delete Request: {}", id);
         return clientService.deleteClient(id);
     }
 

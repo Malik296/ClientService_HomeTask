@@ -1,35 +1,42 @@
 package az.pashabank.ht.clients.job;
 
+import az.pashabank.ht.clients.entity.Client;
 import az.pashabank.ht.clients.model.ClientDTO;
-import az.pashabank.ht.clients.model.DataModel;
+import az.pashabank.ht.clients.repository.ClientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.Random;
 
 @Component
 public class ClientScheduler {
     private static final Logger logger = LoggerFactory.getLogger(ClientScheduler.class);
-
+    private static Random random = new Random();
     private final RandomClientGenerator randomClientGenerator;
-    private final DataModel dataModel;
-    private ClientDTO clientDTO;
+    private final ClientRepository clientRepository;
 
-    @Autowired
-    public ClientScheduler(RandomClientGenerator randomClientGenerator, DataModel dataModel, ClientDTO clientDTO) {
+    public ClientScheduler(RandomClientGenerator randomClientGenerator, ClientRepository clientRepository) {
         this.randomClientGenerator = randomClientGenerator;
-        this.dataModel = dataModel;
-        this.clientDTO = clientDTO;
+        this.clientRepository = clientRepository;
     }
 
     @Scheduled(fixedDelay = 20000, initialDelay = 2000)
-    public void generate() {
-        dataModel.setLastId(dataModel.getLastId() + 1);
-        clientDTO = randomClientGenerator.nameGenerator();
-        clientDTO.setId(dataModel.getLastId());
-        dataModel.getMap().put(dataModel.getLastId(), clientDTO);
+    public void generate() throws InterruptedException {
+        int i = random.nextInt(3);
+        for (int j = 0; j <= i; j++) {
+            ClientDTO clientDTO = randomClientGenerator.nameGenerator();
+            Client client = new Client();
+            client.setName(clientDTO.getName());
+            client.setLastName(clientDTO.getLastName());
 
-        logger.info("New Client Register: " + clientDTO.toString());
+            client.setCreateData(LocalDateTime.now());
+
+            clientRepository.save(client);
+            Thread.sleep(500);
+            logger.info("New Client Register: [Name: {}, Last Name: {}]", clientDTO.getName(), clientDTO.getLastName());
+        }
     }
 }
