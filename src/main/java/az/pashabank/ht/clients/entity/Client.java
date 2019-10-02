@@ -1,26 +1,23 @@
 package az.pashabank.ht.clients.entity;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.List;
 
+
+@Data
 @Entity
-@Table
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "client")
 @EqualsAndHashCode(callSuper = false)
 public class Client extends BaseEntity {
-    @Id
-    @SequenceGenerator(name = "client_seq", sequenceName = "client_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
-    private long id;
 
     @Column
     private String name;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 }
+
+

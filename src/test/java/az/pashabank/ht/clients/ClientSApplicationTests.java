@@ -9,8 +9,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ClientSApplicationTests {
 
-    @Test
+    @Test(timeout = 1000)
     public void contextLoads() {
+        for (int i = 0; i < 100000; i++) {
+            System.out.println(i);
+        }
     }
 
 }

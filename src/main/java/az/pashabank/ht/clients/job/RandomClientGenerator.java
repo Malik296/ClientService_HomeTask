@@ -16,10 +16,8 @@ public class RandomClientGenerator {
     private static final String[] WOMAN_LAST_NAME = {"Məmmədova", "Əliyeva", "Hüseynova", "İsmayılova", "Abdullayeva", "Məhərrəmova", "Əhmədova"};
 
 
-    private ClientDTO clientDTO;
-
-    public ClientDTO nameGenerator() {
-        clientDTO = new ClientDTO();
+    ClientDTO nameGenerator() {
+        ClientDTO clientDTO = new ClientDTO();
         if (random.nextBoolean()) {
             int n = random.nextInt(MAN_NAME.length);
             int ln = random.nextInt(MAN_LAST_NAME.length);
