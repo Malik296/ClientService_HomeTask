@@ -14,10 +14,10 @@ public class ClientDTO {
 
     private long id;
     @NotBlank
-    @Size(min = 3)
+    @Size(min = 3, message = "Min 3 symbol")
     private String name;
     @NotBlank
-    @Size(min = 3)
+    @Size(min = 3, message = "Min 3 symbol")
     private String lastName;
 
     @Override

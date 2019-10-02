@@ -18,7 +18,7 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.OK)
     public String handle(MethodArgumentNotValidException ex){
         logger.error("Format Error: {}", ex.getMessage());
-        return "Format Error";
+        return "Format Error:" ;
     }
 
 
@@ -39,4 +39,11 @@ public class ErrorHandler {
         logger.error("Format Error: {}", ex.getMessage());
         return "Illegal Id";
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handle(IllegalArgumentException ex){
+        logger.error("Format Error: {}", ex.getMessage());
+        return ex.getMessage();
+    }
+
 }

@@ -32,15 +32,15 @@ public class ClientController {
     }
 
     @PostMapping
-    public ClientDTO create(@RequestBody @Valid ClientDTO request) {
+    public ClientDTO addClient(@RequestBody @Valid ClientDTO clientDTO) {
         logger.info("Input Post Request");
-        return clientService.addClient(request);
+        return clientService.addClient(clientDTO);
     }
 
     @PutMapping
-    public ClientDTO update(@Valid @RequestBody ClientDTO request) throws NullPointerException {
+    public ClientDTO update(@Valid @RequestBody ClientDTO clientDTO) throws NullPointerException {
         logger.info("Input Put Request");
-        return clientService.updateClient(request);
+        return clientService.updateClient(clientDTO);
     }
 
     @DeleteMapping("{id}")
@@ -48,5 +48,4 @@ public class ClientController {
         logger.info("Input Delete Request: {}", id);
         return clientService.deleteClient(id);
     }
-
 }
